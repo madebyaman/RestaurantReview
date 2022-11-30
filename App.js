@@ -1,6 +1,14 @@
 import { useState } from 'react';
-import { StyleSheet, ScrollView, Text, TextInput, View } from 'react-native';
+import {
+  StyleSheet,
+  ScrollView,
+  Text,
+  TextInput,
+  View,
+  FlatList,
+} from 'react-native';
 import Header from 'components/Header';
+import RestaurantRow from 'components/RestaurantRow';
 
 export default function App() {
   const [search, setSearch] = useState('');
@@ -36,34 +44,18 @@ export default function App() {
         onChangeText={(text) => setSearch(text)}
         value={search}
       />
-      <ScrollView contentContainerStyle={{ paddingTop: 30 }}>
-        {restaurants
-          .filter(
-            (place) =>
-              // So first time when search is '' or falsy, it doesn't go to next condition. It returns true and gives back every item. If we had not used `!search` then filter would need to check even for 1st condition.
-              !search || place.name.toLowerCase().includes(search.toLowerCase())
-          )
-          .map((res, id) => (
-            <View
-              key={id}
-              style={[
-                styles.row,
-                { backgroundColor: id % 2 === 0 ? 'white' : '#eeeeee' },
-              ]}
-            >
-              <View style={styles.edges}>
-                <Text>{id + 1}</Text>
-              </View>
-              <View style={styles.nameAddress}>
-                <Text>{res.name}</Text>
-                <Text style={styles.address}>{res.address}</Text>
-              </View>
-              <View style={styles.edges}>
-                <Text>Info</Text>
-              </View>
-            </View>
-          ))}
-      </ScrollView>
+      <FlatList
+        data={restaurants.filter(
+          (place) =>
+            // So first time when search is '' or falsy, it doesn't go to next condition. It returns true and gives back every item. If we had not used `!search` then filter would need to check even for 1st condition.
+            !search || place.name.toLowerCase().includes(search.toLowerCase())
+        )}
+        renderItem={({ item, index }) => (
+          <RestaurantRow place={item} id={index} />
+        )}
+        keyExtractor={(item) => item.name}
+        initialNumToRender={16}
+      />
     </View>
   );
 }
