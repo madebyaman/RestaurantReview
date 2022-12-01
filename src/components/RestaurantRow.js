@@ -11,7 +11,9 @@ import Stars from 'components/Stars';
 function RestaurantRow({ navigation, place, id }) {
   const [showInfo, setShowInfo] = useState(false);
   function onPressButton() {
-    navigation.navigate('Info');
+    navigation.navigate('Info', {
+      place: place,
+    });
   }
 
   return (
