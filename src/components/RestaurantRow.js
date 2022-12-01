@@ -8,10 +8,10 @@ import {
 } from 'react-native';
 import Stars from 'components/Stars';
 
-export default function RestaurantRow({ place, id }) {
+function RestaurantRow({ navigation, place, id }) {
   const [showInfo, setShowInfo] = useState(false);
   function onPressButton() {
-    setShowInfo((prev) => !prev);
+    navigation.navigate('Info');
   }
 
   return (
@@ -102,3 +102,5 @@ const styles = StyleSheet.create({
     borderRadius: 4,
   },
 });
+
+export default RestaurantRow;
