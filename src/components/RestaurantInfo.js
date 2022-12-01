@@ -7,3 +7,7 @@ export default function RestaurantInfo() {
     </View>
   );
 }
+
+RestaurantInfo.navigationOptions = (screenProps) => ({
+  title: 'Restaurant Info',
+});

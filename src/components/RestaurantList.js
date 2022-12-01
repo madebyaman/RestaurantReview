@@ -46,6 +46,7 @@ export default function RestaurantList({ navigation }) {
 const styles = StyleSheet.create({
   app: {
     flex: 1,
+    backgroundColor: '#fff',
   },
   input: {
     padding: 10,
@@ -56,4 +57,8 @@ const styles = StyleSheet.create({
     borderColor: '#ddd',
     backgroundColor: '#f5f5f5',
   },
+});
+
+RestaurantList['navigationOptions'] = (screenProps) => ({
+  header: null,
 });
